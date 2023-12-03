@@ -73,7 +73,8 @@ def find_part_numbers(file):
     returns the sum of every engine part in the schematic (i.e., every number in
     the matrix that is adjacent to a symbol).
 
-    My solution passes through the schematic twice. Once to find 
+    My solution passes through the schematic twice. Once to find symbols, and a
+    second time to find adjacent numbers.
 
     Inputs:
         file(str): the name of the input file

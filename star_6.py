@@ -77,7 +77,8 @@ def find_gear_ratios(file):
     ratio (the product of these numbers), and then sums the ratios of the entire
     schematic.
 
-    My solution passes through the schematic twice. Once to find 
+    My solution passes through the schematic twice. Once to find potential
+    gears, and a second time to find the numbers adjacent to them.
 
     Inputs:
         file(str): the name of the input file
