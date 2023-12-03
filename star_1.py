@@ -11,7 +11,7 @@ def unscamble_calibration(file):
     Inputs:
         file(str): the name of the input file
 
-    Returns [int]
+    Returns int
     """
     # Process input file into form usable by algorithm
     f = open(file, encoding = "utf-8")

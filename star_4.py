@@ -14,7 +14,7 @@ def count_power_games(file):
     Inputs:
         file(str): the name of the input file
 
-    Returns [int]
+    Returns int
     """
     f = open(file, encoding = "utf-8")
     games_raw = f.read()

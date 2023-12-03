@@ -12,7 +12,7 @@ def find_impossible_game(file):
     Inputs:
         file(str): the name of the input file
 
-    Returns [int]
+    Returns int
     """
 
     # Process input file into useable list for algorithm
