@@ -3,48 +3,6 @@ Module to solve the second star of Day 3 of the Advent of Code 2023, which is th
 6th star overall.
 """
 
-def find_pot_gears(matrix):
-    """
-    Takes in a matrix, and prepares a dictionary where every key is the
-    coordinates to a potential gear. These keys link to empty lists that can
-    contain adjacent numbers.
-
-    Inputs:
-        matrix(lst[str]): the matrix of characters
-
-    Returns dict{tuple(int, int): lst}
-    """
-    gear_coor = {}
-    for i, line in enumerate(matrix):
-        for j, dot in enumerate(line):
-            if dot == "*":
-                gear_coor[(i, j)] = []
-    return gear_coor
-
-
-def is_adjacent(number, row, start_col, end_col, gear_coor):
-    """
-    Take in a number and its position in a matrix and searches a dictionary of
-    potential gears, adding itself to adjacency list of any potential gears it
-    is adjacent to.
-
-    Inputs:
-        row(int): the row coordinate of the number
-        start_col(int): the starting column coordinate of a number
-        end_col(int): the ending column coordinate of a number
-        gear_coor(dict{tuple(int, int): lst}): the dictionary of potential gears
-            and their list of adjacent numbers.
-
-    Returns dict{tuple(int, int): lst}
-    """
-    for sym in gear_coor:
-        i, j = sym
-        if (row - 1 <= i <= row + 1) and (start_col - 1 <= j <= end_col + 1):
-            gear_coor[sym] = gear_coor[sym] + [number]
-
-    return gear_coor
-
-
 def find_number(col, line):
     """
     Takes in a number's starting column in a line and finds the column it ends,
@@ -77,8 +35,7 @@ def find_gear_ratios(file):
     ratio (the product of these numbers), and then sums the ratios of the entire
     schematic.
 
-    My solution passes through the schematic twice. Once to find potential
-    gears, and a second time to find the numbers adjacent to them.
+    This newer solution passes through the schematic once.
 
     Inputs:
         file(str): the name of the input file
@@ -90,18 +47,29 @@ def find_gear_ratios(file):
     matrix = f.read()
     matrix = matrix.split("\n")
 
-    # Find all potential gears and put them as keys to a dictionary
-    gear_coor = find_pot_gears(matrix)
-
-    # Find all numbers adjacent to a potential gear and adds them to the
-    # corresponding adjacency lists.
+    # Find all potential gears and put their coordinates as keys to a
+    # dictionary, and find all numbers and add their coordinates to a list.
+    num_coor = []
+    gear_coor = {}
     for row, line in enumerate(matrix):
         end_col = -1
         for col, dot in enumerate(line):
-            if dot.isdigit() and col > end_col:
+            if col <= end_col:
+                pass
+            elif dot == "*":
+                gear_coor[(row, col)] = []
+            elif dot.isdigit():
                 start_col = col
                 number, end_col = find_number(start_col, line)
-                gear_coor = is_adjacent(number, row, start_col, end_col, gear_coor)
+                num_coor.append((row, start_col, end_col, number))
+
+    # Find numbers adjacent to a potential gear and add them to the adjaceny
+    # list of the gears
+    for row, start_col, end_col, number in num_coor:
+        for i, j in gear_coor.keys():
+            if (row - 1 <= i <= row + 1) and (start_col - 1 <= j <= end_col + 1):
+                gear_coor[(i, j)] = gear_coor[(i, j)] + [number]
+                break
 
     # Find which potential gears are true gears and add gear ratios to answer
     answer = 0
