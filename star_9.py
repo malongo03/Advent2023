@@ -25,6 +25,11 @@ def assemble_piecewise(piecewise_data):
         dest_start, source_start, seed_range = [int(num) for num in line.split()]
         piecewise.append((dest_start, source_start, seed_range))
 
+    # Sorts the piecewise functions by their source interval. This is so we
+    # don't have to iterate over these functions for every seed value: since we
+    # know each seed value in the heap is greater than the last, and the same
+    # for the functions, we can iterate through both lists only once with some
+    # checks.
     piecewise.sort(key = lambda a: a[1])
 
     return tuple(piecewise)
@@ -45,11 +50,14 @@ def parse_data(file):
 
     seeds = text[0].split()[1:]
     seeds = [int(seed) for seed in seeds]
+    # Sorts the seed values from greatest to least. See previous comment in the
+    # assemble_piecewise function.
     seeds.sort(reverse = True)
 
-    conversion_functions = tuple([assemble_piecewise(item) for item in text[1:]])
+    # Generates a piecewise function for each map of the input file.
+    conversion_maps = tuple([assemble_piecewise(item) for item in text[1:]])
 
-    return seeds, conversion_functions
+    return seeds, conversion_maps
 
 
 def compute_seeds_through_map(file):
@@ -63,26 +71,43 @@ def compute_seeds_through_map(file):
 
     Returns int
     """
-    seeds, conversion_functions = parse_data(file)
+    seeds, conversion_maps = parse_data(file)
 
-    for convert_func in conversion_functions:
+    for convert_piecewise in conversion_maps:
         seed_heap = seeds[::]
         seeds = []
-        function_index = 0
+        function_id = 0
 
+        # A heap of starting seed values are created and resolved in order. As
+        # explained, both the heap and the piecewise functions are in order, and
+        # this allows us to go linearly up the piecewise functions once, since
+        # we know any piecewise function we've gone past can't possibly have
+        # an interval containing a seed value, since the next seeds are greater
+        # than the ones before.
         while seed_heap:
             seed = seed_heap.pop()
 
-            dest_start, source_start, func_range = convert_func[function_index]
+            # Unpacks a conversion function and finds the end of the range of
+            # of the domain of the function, along with where the current
+            # seed value would map to if this is the correct function.
+            dest_start, source_start, func_range = convert_piecewise[function_id]
             dest_seed = (seed - source_start) + dest_start
             source_end = source_start + func_range
 
             if seed >= source_end:
-                function_index += 1
+                # Checks if the domain of the conversion function is below the
+                # current seed value. If it is, we move the index to the
+                # function with the next highest domain and reset the heap.
+                function_id += 1
                 seed_heap.append(seed)
             elif seed < source_start:
+                # Checks if the current seed is not covered by a conversion
+                # function. If it is, it is unaffected by the map
+                # transformation.
                 seeds.append(seed)
             else:
+                # The correct conversion function has been found, so the
+                # transformed seed value can be appended to the outpost list
                 seeds.append(dest_seed)
 
         seeds.sort(reverse = True)

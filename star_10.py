@@ -44,6 +44,11 @@ def assemble_piecewise(piecewise_data):
     piecewise_data = piecewise_data.split("\n")[1:]
     piecewise = []
 
+    # Sorts the piecewise functions by their source interval. This is so we
+    # don't have to iterate over these functions for every seed value: since we
+    # know each seed value in the heap is greater than the last, and the same
+    # for the functions, we can iterate through both lists only once with some
+    # checks.
     for line in piecewise_data:
         dest_start, source_start, seed_range = [int(num) for num in line.split()]
         piecewise.append((dest_start, source_start, seed_range))
@@ -68,6 +73,7 @@ def parse_data(file):
 
     seed_array = construct_seed_array(text[0])
 
+    # Generates a piecewise function for each map of the input file.
     conversion_functions = tuple([assemble_piecewise(item) for item in text[1:]])
 
     return seed_array, conversion_functions
@@ -91,9 +97,18 @@ def compute_ranges_through_map(file):
         seed_array = []
         function_index = 0
 
+        # A heap of starting seed ranges are created and resolved in order. As
+        # explained, both the heap and the piecewise functions are in order, and
+        # this allows us to go linearly up the piecewise functions once, since
+        # we know any piecewise function we've gone past can't possibly have
+        # an interval containing a seed range, since the next seeds are greater
+        # than the ones before.
         while seed_heap:
             seed, s_range = seed_heap.pop()
 
+            # Unpacks a conversion function and finds the end of the range of
+            # of the domain of the function, along with where the current
+            # seed range would map to if this is the correct function.
             dest_start, source_start, func_range = convert_func[function_index]
             dest_seed = (seed - source_start) + dest_start
             heap_start = source_start + func_range
@@ -105,8 +120,14 @@ def compute_ranges_through_map(file):
             elif seed < source_start:
                 seed_array.append((seed, s_range))
             elif heap_start > array_end:
+                # Checks if current seed range fits in the domain of the current
+                # conversion function. If it is, the entire range is transformed.
                 seed_array.append((dest_seed, s_range))
             else:
+                # If the seed range does not fit in the domain of the function,
+                # the range is sliced along the domain boundaries and the
+                # orphaned portion is added back into the pile to be resolved.
+                # The rest gets resolved and added to the output.
                 heap_s_range = array_end - heap_start + 1
                 array_s_range = heap_start - seed
                 seed_array.append((dest_seed, array_s_range))
