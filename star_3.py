@@ -2,7 +2,6 @@
 Module to solve the first star of Day 2 of the Advent of Code 2023, which is the
 3rd star overall.
 """
-
 def find_impossible_game(file):
     """
     Takes in a list of Snow Island games (see Day 2 of Advent of Code 2023), and

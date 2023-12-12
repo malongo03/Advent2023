@@ -1,16 +1,21 @@
-
+"""
+Module to solve the first star of Day 8 of the Advent of Code 2023, which is the
+15th star overall.
+"""
 def load_graph(filename):
-    '''
-    Loads the tree from a file.
+    """
+    Creates graph as an adjaceny dictionary from file, while also exporting the
+    direction list.
 
     Inputs:
-      filename [str]: The name of the file to load the tree from.
+      filename [str]: The name of the file to load the graph from.
 
-    Returns [Tree]: The root of the tree or ``None`` if the file does
-      not exist.
-    '''
-    with open(filename, encoding = "utf-8") as test_file:
-        input_lines = test_file.read().split('\n')
+    Returns:
+        str
+        dict[str: lst[str]]
+    """
+    with open(filename, encoding = "utf-8") as file:
+        input_lines = file.read().split('\n')
 
     # Build graph
     nodes = {}
@@ -20,11 +25,20 @@ def load_graph(filename):
 
     return input_lines[0], nodes
 
-def fun_ction(file):
+def follow_directions(file):
+    """
+    Takes in a list of left and right commands and a graph adjacency list
+    (see Day 8 of Advent of Code 2023) and processes it to find how many turns
+    it takes to go from node AAA to node ZZZ.
+
+    Inputs:
+        file [str]: the input file name
+
+    Returns int
+    """
     instructions, graph = load_graph(file)
 
     node = "AAA"
-    nodes = ["AAA"]
     break_flag = True
     path_steps = 0
     while break_flag:
@@ -41,4 +55,4 @@ def fun_ction(file):
     return path_steps
 
 
-print(fun_ction("day_8.txt"))
+print(follow_directions("day_8.txt"))

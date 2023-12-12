@@ -1,9 +1,8 @@
 """
 Module to solve the second star of Day 6 of the Advent of Code 2023, which is
-the 12st star overall.
+the 12th star overall.
 """
 import math
-
 def parse_file(file):
     """
     This function parses the input text file into a usable output, consisting

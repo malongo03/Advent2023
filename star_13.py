@@ -1,9 +1,8 @@
 """
 Module to solve the first star of Day 7 of the Advent of Code 2023, which is the
-13st star overall.
+13rd star overall.
 """
 CARDS = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
-
 def parse_input(file):
     """
     Parses the input file into a list of hands with their corrosponding bids.

@@ -1,15 +1,23 @@
+"""
+Module to solve the second star of Day 8 of the Advent of Code 2023, which is
+the 16th star overall.
+"""
 import math
 def load_graph(filename):
     """
-    Creates graph as an adjaceny dictionary from file
+    Creates graph as an adjaceny dictionary from file, while also exporting the
+    direction list and the list of nodes ending in A.
 
     Inputs:
       filename [str]: The name of the file to load the graph from.
 
-    Returns dict[int: lst[int]]
+    Returns:
+        str
+        dict{str: lst[str]}
+        lst[str]
     """
-    with open(filename, encoding = "utf-8") as test_file:
-        input_lines = test_file.read().split('\n')
+    with open(filename, encoding = "utf-8") as file:
+        input_lines = file.read().split('\n')
 
     # Build graph
     graph = {}
@@ -22,7 +30,20 @@ def load_graph(filename):
 
     return input_lines[0], graph, a_nodes
 
-def fun_ction(file):
+def follow_directions_simultanetously(file):
+    """
+    Takes in a list of left and right commands and a graph adjacency list
+    (see Day 8 of Advent of Code 2023) and processes it to find how many turns
+    it takes to go from every node ending in A to simultanetously end up at
+    every node ending in Z. It does this by taking advantage of the looping
+    cycles of each A to Z path and finding the least common multiplier of these
+    cycles lengths.
+
+    Inputs:
+        file [str]: the input file name
+
+    Returns int
+    """
     instructions, graph, nodes = load_graph(file)
 
     path_steps = 0
@@ -51,4 +72,4 @@ def fun_ction(file):
     return answer
 
 
-print(fun_ction("day_8.txt"))
+print(follow_directions_simultanetously("day_8.txt"))

@@ -1,8 +1,7 @@
 """
 Module to solve the second star of Day 7 of the Advent of Code 2023, which is
-the 14st star overall.
+the 14th star overall.
 """
-
 def parse_input(file):
     """
     Parses the input file into a list of hands with their corrosponding bids.

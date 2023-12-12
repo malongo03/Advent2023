@@ -2,7 +2,6 @@
 Module to solve the first star of Day 3 of the Advent of Code 2023, which is the
 5th star overall.
 """
-
 def find_number(col, line):
     """
     Takes in a number's starting column in a line and finds the column it ends,

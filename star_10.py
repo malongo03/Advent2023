@@ -1,6 +1,6 @@
 """
 Module to solve the second star of Day 5 of the Advent of Code 2023, which is
-the 10st star overall.
+the 10th star overall.
 """
 def construct_seed_array(seeds):
     """
@@ -30,7 +30,7 @@ def assemble_piecewise(piecewise_data):
     A subfunction of the parser. This takes in the text string for one of the
     maps and translates it into array before sorting the output.
 
-    The map consists of two ranges that are bijected with the opertation that 
+    The map consists of two ranges that are bijected with the opertation that
     the nth element of the source range maps to the nth element of the
     destination range. This is represented by giving the starting element of the
     destination range, the starting element of the source range, and the length
