@@ -32,7 +32,7 @@ def extrapolate_oasis_list(file):
     """
     Takes in a list of OASIS values over a consistent time frame (see Day 9 of
     the Advent of Code 2023) and predicts the 0th value of the sequence. It
-    then sums these predictions
+    then sums these predictions.
 
     Input:
         file [str]: the filename of the input

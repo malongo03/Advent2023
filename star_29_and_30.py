@@ -1,3 +1,7 @@
+"""
+Module to solve the first and second star of Day 15 of the Advent of Code 2023,
+which are the 29th and 30th stars overall.
+"""
 def hash_algorithm(line):
     """
     Calculates the HASH value of an input string.
@@ -26,12 +30,15 @@ def initialize_lenses(filename):
     with open(filename, encoding = "utf-8") as f:
         sequence = f.read().split(",")
 
+    # Part 1
+    # Sums HASH of instructions
     star_1_answer = 0
     for code in sequence:
         star_1_answer += hash_algorithm(code)
     print(f"The answer to Star 29 is {star_1_answer}")
 
-
+    # Part 2
+    # Simulates initiation
     box_dict = {box: [] for box in range(256)}
     for code in sequence:
         index = 0
@@ -56,6 +63,7 @@ def initialize_lenses(filename):
             new_lens = int(code[index + 1])
             box_dict[box] = box_dict[box] + [[label, new_lens]]
 
+    # Calculates and prints light intensity
     star_2_answer = 0
     for box, lens_list in box_dict.items():
         for index, lens_w_label in enumerate(lens_list):
