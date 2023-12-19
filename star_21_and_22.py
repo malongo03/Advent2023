@@ -9,10 +9,10 @@ def expand_cols(galaxy_positions, width, expansion_rate):
 
     Input:
         galaxy_positions [lst[tuple(int, int)]]: coordiantes for the positions
-            of all of the galaxies
-        width [int]: the width of the initial data the galaxies were found in
+            of all of the galaxies.
+        width [int]: the width of the initial data the galaxies were found in.
         expansion_rate [int]: how many extra columns of distance each empty
-            column should be worth as compared to an occupied column
+            column should be worth as compared to an occupied column.
 
     Returns lst[tuple(int, int)]
     """
@@ -51,7 +51,7 @@ def calculate_galactic_distances(file, expansion_rate = 1):
     time.
 
     Inputs:
-        file [str]: the name of the input file
+        file [str]: the name of the input file.
         expansion_rate [int = 1]: how many extra rows or cols of distance an
             unoccupied row or col should be worth respectively as compared to a
             row or column that has at least one galaxy found in it.

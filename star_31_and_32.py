@@ -12,9 +12,9 @@ def energize_mirror(start_space, start_direct, mirror_dict):
     part is the row, while the imaginary part is the column.
 
     Inputs:
-        start_space [Complex]: The starting position of the light beam.
-        start_direct [Complex]: The starting direction of the light beam.
-        mirror_dict [dict{Complex: str}]: The field of mirror the light travels
+        start_space [Complex]: the starting position of the light beam.
+        start_direct [Complex]: the starting direction of the light beam.
+        mirror_dict [dict{Complex: str}]: the field of mirror the light travels
             through, represented as a dictionary.
 
     Returns set(Complex)
@@ -34,11 +34,13 @@ def energize_mirror(start_space, start_direct, mirror_dict):
             case "\\": stack.add((space, complex(direction.imag, direction.real)))
             case "|":
                 if direction == 1j or direction == -1j:
-                    stack.add((space, 1)) ; stack.add((space, -1))
+                    stack.add((space, 1))
+                    stack.add((space, -1))
                 else: stack.add((space, direction))
             case "-":
                 if direction == 1 or direction == -1:
-                    stack.add((space, 1j)) ; stack.add((space, -1j))
+                    stack.add((space, 1j))
+                    stack.add((space, -1j))
                 else: stack.add((space, direction))
             case ".": stack.add((space, direction))
             case None: continue
@@ -54,7 +56,7 @@ def count_energized_tiles(filename):
     lava generator's arrangement of mirrors (see Day 16 of Advent of Code 2023).
 
     Input:
-        filename [str]: The filename of the input
+        filename [str]: the filename of the input
 
     """
     with open(filename, encoding = "utf-8") as f:

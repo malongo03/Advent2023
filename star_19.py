@@ -13,8 +13,8 @@ def find_loop_trail(pipe_map):
 
     Returns:
         (int, int): the corrdinate of tile connecting to S (i.e., the start of
-            loop)
-        cha: the direction of S relative to the connecting tile
+            loop).
+        cha: the direction of S relative to the connecting tile.
     """
     break_flag = False
     for row, line in enumerate(pipe_map):
@@ -53,9 +53,10 @@ def track_loop(loop_tile, st_from_direction, pipe_map):
     was arrived at).
 
     Inputs:
-        loop_tile [tuple(int, int)]: the coordinates of the start of the loop
-        st_from_direction [cha]:
-        pipe_map [lst[lst[cha]]]: the matrix of pipes representing the map
+        loop_tile [tuple(int, int)]: the coordinates of the start of the loop.
+        st_from_direction [cha]: the position of the "S" tile relative to
+            beginning of the loop.
+        pipe_map [lst[lst[cha]]]: the matrix of pipes representing the map.
 
     Returns:
         lst[tuple(int, int)]: a list of cooridantes that the loop visited
@@ -136,7 +137,7 @@ def find_beetle_loop_length(file):
     pipe loop that the beetle is scurring in.
 
     Inputs:
-        file [str]: the filename of the input
+        file [str]: the filename of the input.
 
     Returns int
     """

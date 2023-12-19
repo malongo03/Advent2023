@@ -7,7 +7,7 @@ def hash_algorithm(line):
     Calculates the HASH value of an input string.
 
     Input:
-        line [str]
+        line [str]: an input string.
 
     Return int
     """
@@ -25,7 +25,7 @@ def initialize_lenses(filename):
     light.
 
     Input:
-        filename [str]: The filename of the input
+        filename [str]: the filename of the input.
     """
     with open(filename, encoding = "utf-8") as f:
         sequence = f.read().split(",")

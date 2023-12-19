@@ -10,7 +10,7 @@ def search_reflection(array, length):
     Inputs:
         array [lst[str]]: a list of columns/rows of an 2D array of characters.
         length [int]: the number of rows/columns in the array (for row array and
-            column arrays respectively)
+            column arrays respectively).
 
     Returns int
     """
@@ -34,8 +34,8 @@ def check_reflect(array, length, reflect_index):
     Inputs:
         array [lst[str]]: a list of columns/rows of an 2D array of characters.
         length [int]: the number of rows/columns in the array (for row array and
-            column arrays respectively)
-        reflect_index [int]: the index of reflection to check
+            column arrays respectively).
+        reflect_index [int]: the index of reflection to check.
 
     Return bool
     """
@@ -68,7 +68,9 @@ def volcano_reflections(filename):
     with open(filename, encoding = "utf-8") as f:
         raw_arrays = f.read().split("\n\n")
     row_arrays = [[line for line in array.split("\n")] for array in raw_arrays]
-    col_arrays = [["".join([line[i] for line in array.split("\n")]) for i in range(len(array.split("\n")[0]))] for array in raw_arrays]
+    col_arrays = [  ["".join([line[i] for line in array.split("\n")])
+                     for i in range(len(array.split("\n")[0]))]
+                  for array in raw_arrays]
     arrays = ((row_arrays[i], col_arrays[i]) for i in range(len(raw_arrays)))
 
     answer = 0

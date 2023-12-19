@@ -8,9 +8,9 @@ def tilt_direction(matrix, direction):
     rocks "O" in one of four cardinal directions.
 
     Inputs:
-        matrix [lst[str]]: A list of strings representing a field of square and
+        matrix [lst[str]]: a list of strings representing a field of square and
             round rocks.
-        direction [cha]: A character representing the direction of the tilt
+        direction [cha]: a character representing the direction of the tilt.
 
     Returns lst[str]
     """
@@ -49,7 +49,7 @@ def rock_washing_machine(filename):
     in a cycle of north, west, south, and east 1,000,000,000 times.
 
     Input:
-        filename [str]: The filename of the map.
+        filename [str]: the filename of the input map represented as a matrix.
     """
     with open(filename, encoding = "utf-8") as f:
         # We will be keeping the matrix as composed of a list of strings to take

@@ -54,9 +54,10 @@ def track_loop(loop_tile, st_from_direction, pipe_map):
     was arrived at).
 
     Inputs:
-        loop_tile [tuple(int, int)]: the coordinates of the start of the loop
-        st_from_direction [cha]:
-        pipe_map [lst[lst[cha]]]: the matrix of pipes representing the map
+        loop_tile [tuple(int, int)]: the coordinates of the start of the loop.
+        st_from_direction [cha]: the position of the "S" tile relative to
+            beginning of the loop.
+        pipe_map [lst[lst[cha]]]: the matrix of pipes representing the map.
 
     Returns:
         lst[lst[bool]]: a matrix corrosponding with the pipe map that tracked
@@ -66,7 +67,8 @@ def track_loop(loop_tile, st_from_direction, pipe_map):
     """
     pipe_row, pipe_col = loop_tile
 
-    # Creates a matrix of booleans that represent whether
+    # Creates a matrix of booleans that represent whether a tile is part of the
+    # boundary
     height = len(pipe_map)
     width = len(pipe_map[0])
     boundary_tiles = [[False for _ in range(width)] for _ in range(height)]
