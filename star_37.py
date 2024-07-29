@@ -102,6 +102,7 @@ def follow_workflows(workflows, items):
                     directory = rest[0]
                     break
                 quality, comparison, destination = rest
+                # pylint: disable = eval-used
                 if eval(item[quality] + comparison):
                     directory = destination
                     break
