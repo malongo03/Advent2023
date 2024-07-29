@@ -2,6 +2,7 @@
 Module to solve the second star of Day 8 of the Advent of Code 2023, which is
 the 16th star overall.
 """
+
 import math
 def load_graph(filename):
     """
